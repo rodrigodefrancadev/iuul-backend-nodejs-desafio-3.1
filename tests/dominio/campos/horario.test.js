@@ -1,6 +1,6 @@
 // @ts-check
 
-import { describe, it } from "node:test"
+import test, { describe, it } from "node:test"
 import assert from "node:assert/strict"
 import { Horario } from "../../../src/dominio/campos/horario.js";
 
@@ -66,5 +66,18 @@ describe('Campo: Horário', () => {
         assert.doesNotThrow(() => Horario.fromHHMMstr('0000'))
         assert.doesNotThrow(() => Horario.fromHHMMstr('1230'))
         assert.doesNotThrow(() => Horario.fromHHMMstr('2359'))
+    })
+
+    test('Comparar Horários', () => {
+        const _0000 = Horario.fromHHMMstr('0000')
+        const _1230 = Horario.fromHHMMstr('1230')
+        const _2359 = Horario.fromHHMMstr('2359')
+
+        assert(_0000.ehAntesDe(_1230));
+        assert(_0000.ehAntesDe(_2359));
+        assert(_1230.ehAntesDe(_2359));
+        assert(!_1230.ehAntesDe(_0000));
+        assert(!_1230.ehAntesDe(_1230));
+        assert(!_2359.ehAntesDe(_1230));
     })
 })
