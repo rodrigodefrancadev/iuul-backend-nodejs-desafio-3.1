@@ -2,10 +2,7 @@
 
 import { describe, it } from "node:test"
 import assert from "node:assert/strict"
-import { Paciente } from "../../../src/dominio/entidades/paciente";
 import { Cpf } from "../../../src/dominio/campos/cpf";
-import { NomeDePessoa } from "../../../src/dominio/campos/nome-de-pessoa";
-import { DataDeNascimento } from "../../../src/dominio/campos/data-de-nascimento";
 import { Horario } from "../../../src/dominio/campos/horario";
 import { IntervaloDeHorario } from "../../../src/dominio/campos/intervalo-de-horario";
 import { Agendamento } from "../../../src/dominio/entidades/agendamento";
