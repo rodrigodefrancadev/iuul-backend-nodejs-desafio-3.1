@@ -5,6 +5,14 @@ export class Horario {
     #hora;
     #minuto;
 
+    get hora() {
+        return this.#hora;
+    }
+
+    get minuto() {
+        return this.#minuto;
+    }
+
     /**
      * @param {number} hora 
      * @param {number} minuto 
