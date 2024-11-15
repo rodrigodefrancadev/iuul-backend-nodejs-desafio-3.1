@@ -15,6 +15,19 @@ describe("Campo: Nome de Pessoa", () => {
         assert.doesNotThrow(() => new NomeDePessoa(nomeCorreto))
     })
 
+    it('deve comparar Nomes de Pessoas com sucesso', () => {
+        const nome1 = new NomeDePessoa('Fulano');
+        const nome2 = new NomeDePessoa('Fulano');
+        const nome3 = new NomeDePessoa('Cicrano');
+
+        assert(nome1.equals(nome1));
+        assert(nome1.equals(nome2));
+        assert(nome2.equals(nome1));
+        assert(!nome1.equals(nome3));
+        assert(!nome2.equals(nome3));
+        assert(nome3.equals(nome3));
+    })
+
 })
 
 
