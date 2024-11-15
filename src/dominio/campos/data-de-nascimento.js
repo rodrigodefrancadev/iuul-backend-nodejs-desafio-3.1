@@ -31,10 +31,18 @@ export class DataDeNascimento {
     }
 
     toString() {
-        return this.#valor.toLocaleDateString();
+        return DateTime.fromJSDate(this.#valor).toFormat('dd/MM/yyyy');
     }
 
     toJson() {
-        return this.#valor;
+        return this.#valor.toDateString();
+    }
+
+    /**
+     * 
+     * @param {DataDeNascimento} outraDataDeNascimento 
+     */
+    equals(outraDataDeNascimento) {
+        return this.toString() === outraDataDeNascimento.toString();
     }
 }

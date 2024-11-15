@@ -16,6 +16,30 @@ describe("Campo: Data de Nascimento", () => {
         assert.doesNotThrow(() => new DataDeNascimento(dataNoPassado))
     })
 
+    it('deve retornar a data no formato DD/MM/AAAA ao chamar a função toString', () => {
+        const dia = 15;
+        const mes = 12;
+        const ano = 2015;
+
+        const data = new Date(ano, mes - 1, dia);
+        const dataDeNascimento = new DataDeNascimento(data);
+
+        assert.equal(dataDeNascimento.toString(), `${dia}/${mes}/${ano}`);
+    })
+
+    it('deve comparar datas de nascimentos com sucesso', () => {
+        const dataDeNascimento1 = new DataDeNascimento(new Date('2000-01-01'));
+        const dataDeNascimento2 = new DataDeNascimento(new Date('2000-01-01'));
+        const dataDeNascimento3 = new DataDeNascimento(new Date('2000-01-02'));
+
+        assert(dataDeNascimento1.equals(dataDeNascimento1));
+        assert(dataDeNascimento1.equals(dataDeNascimento2));
+        assert(dataDeNascimento2.equals(dataDeNascimento1));
+        assert(!dataDeNascimento1.equals(dataDeNascimento3));
+        assert(!dataDeNascimento2.equals(dataDeNascimento3));
+        assert(dataDeNascimento3.equals(dataDeNascimento3));
+    })
+
 })
 
 export { }
