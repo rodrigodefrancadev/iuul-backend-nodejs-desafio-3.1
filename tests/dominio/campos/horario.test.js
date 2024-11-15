@@ -71,13 +71,16 @@ describe('Campo: Horário', () => {
     test('Comparar Horários', () => {
         const _0000 = Horario.fromHHMMstr('0000')
         const _1230 = Horario.fromHHMMstr('1230')
+        const _1230_2 = Horario.fromHHMMstr('1230')
         const _2359 = Horario.fromHHMMstr('2359')
 
-        assert(_0000.ehAntesDe(_1230));
-        assert(_0000.ehAntesDe(_2359));
-        assert(_1230.ehAntesDe(_2359));
-        assert(!_1230.ehAntesDe(_0000));
-        assert(!_1230.ehAntesDe(_1230));
-        assert(!_2359.ehAntesDe(_1230));
+        assert(_0000 < _1230);
+        assert(_0000 < _2359);
+        assert(_1230 < _2359);
+        assert(_1230 > _0000);
+        assert(_1230 <= _1230_2);
+        assert(_2359 > _1230);
+        assert(_1230.equals(_1230));
+        assert(_1230.equals(_1230_2));
     })
 })
