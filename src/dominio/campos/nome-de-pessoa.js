@@ -1,4 +1,6 @@
-export class Nome {
+// @ts-check
+
+export class NomeDePessoa {
 
     #valor;
 
@@ -11,7 +13,7 @@ export class Nome {
      * @param {string} valor 
      */
     constructor(valor) {
-        Nome.#validar(valor)
+        NomeDePessoa.#validar(valor)
         this.#valor = valor;
     }
 
@@ -19,7 +21,9 @@ export class Nome {
      * @param {string} nomeStr
      */
     static #validar(nomeStr) {
-        throw new Error('Não implementado');
+        if (nomeStr.length < 5) {
+            throw new Error('O nome deve ter pelo menos 5 caracteres');
+        }
     }
 
     toString() {
@@ -28,5 +32,13 @@ export class Nome {
 
     toJson() {
         return this.#valor;
+    }
+
+    /**
+     * 
+     * @param {NomeDePessoa} outroNomeDePessoa 
+     */
+    equals(outroNomeDePessoa) {
+        return this.#valor === outroNomeDePessoa.#valor;
     }
 }
