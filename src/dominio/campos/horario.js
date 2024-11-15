@@ -67,4 +67,12 @@ export class Horario {
     toString() {
         return `${this.#hora.toString().padStart(2, '0')}:${this.#minuto.toString().padStart(2, '0')}`
     }
+
+    static agora() {
+        const dateAgora = new Date();
+        const hora = dateAgora.getHours();
+        const minuto = dateAgora.getMinutes();
+        const agora = new Horario(hora, minuto);
+        return agora;
+    }
 }

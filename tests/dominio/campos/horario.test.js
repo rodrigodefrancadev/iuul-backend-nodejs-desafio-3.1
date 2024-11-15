@@ -92,4 +92,19 @@ describe('Campo: Horário', () => {
         assert(horario.toString() === `${hora.toString().padStart(2, '0')}:${minuto.toString().padStart(2, '0')}`)
 
     })
+
+    test('Horario.agora() deve retornar a hora atual', (t) => {
+        const hora = 15;
+        const minuto = 45;
+
+        t.mock.timers.enable({
+            apis: ['Date'],
+            now: new Date(`2024-01-01T${hora}:${minuto}:12`)
+        });
+
+        const horarioAgora = Horario.agora();
+
+        assert.equal(hora, horarioAgora.hora);
+        assert.equal(minuto, horarioAgora.minuto);
+    })
 })
