@@ -83,4 +83,13 @@ describe('Campo: Horário', () => {
         assert(_1230.equals(_1230));
         assert(_1230.equals(_1230_2));
     })
+
+    test('A função toString deve retornar um horario com o formato HH:MM', () => {
+        const hora = 6
+        const minuto = 4
+        const horario = new Horario(hora, minuto);
+
+        assert(horario.toString() === `${hora.toString().padStart(2, '0')}:${minuto.toString().padStart(2, '0')}`)
+
+    })
 })
