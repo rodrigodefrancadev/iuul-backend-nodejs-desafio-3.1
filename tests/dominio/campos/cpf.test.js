@@ -39,6 +39,20 @@ describe("Campo: CPF", () => {
         })
     })
 
+    it('deve comparar CPFs corretamente', () => {
+        const cpf1 = new Cpf("22375922093");
+        const cpf2 = new Cpf("22375922093");
+        const cpf3 = new Cpf("92825016047");
+
+        assert(cpf1.equal(cpf2) === true);
+        assert(cpf2.equal(cpf1) === true);
+
+        assert(cpf1.equal(cpf3) === false);
+        assert(cpf2.equal(cpf3) === false);
+
+        assert(cpf3.equal(cpf3) === true);
+    })
+
 })
 
 
