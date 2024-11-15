@@ -1,3 +1,7 @@
+// @ts-check
+
+import { DateTime } from "luxon";
+
 export class DataDeNascimento {
 
     #valor;
@@ -19,7 +23,11 @@ export class DataDeNascimento {
      * @param {Date} data
      */
     static #validar(data) {
-        throw new Error('Não implementado');
+        const date_ = DateTime.fromJSDate(data).startOf('day')
+        const today = DateTime.fromJSDate(new Date()).startOf('day')
+        if (date_ > today) {
+            throw new Error('A data de nascimento não pode ser no futuro');
+        }
     }
 
     toString() {
