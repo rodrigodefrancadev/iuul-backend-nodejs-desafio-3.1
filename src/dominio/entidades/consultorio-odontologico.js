@@ -34,20 +34,6 @@ export class ConsultorioOdontologico {
     }
 
     /**
-     * @param {Cpf} cpf
-     * @returns {boolean}
-     */
-    verificaCpfJaCadastrado(cpf) {
-        try {
-            this.getPaciente(cpf);
-            return true;
-        }
-        catch {
-            return false;
-        }
-    }
-
-    /**
     * 
     * @param {Cpf} cpf
     * @returns {Paciente} paciente encotrado

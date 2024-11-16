@@ -18,6 +18,8 @@ describe("Entidade: Paciente", () => {
 
         const paciente = new Paciente(cpf, nome, dataDeNascimento);
         assert.equal(paciente.idade, idade);
+        assert(paciente.nome.equals(nome));
+        assert(paciente.dataDeNascimento.equals(dataDeNascimento));
 
     })
 });

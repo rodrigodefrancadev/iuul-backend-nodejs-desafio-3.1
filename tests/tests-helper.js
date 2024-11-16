@@ -90,6 +90,11 @@ class TestsHelper {
         return pacientes;
     }
 
+    /**
+     * 
+     * @param {number} idadeMinimaPaciente 
+     * @returns 
+     */
     gerarConsultorio(idadeMinimaPaciente) {
         const horaDeAbertura = new Horario(8, 0);
         const horaDeFechamento = new Horario(19, 0);

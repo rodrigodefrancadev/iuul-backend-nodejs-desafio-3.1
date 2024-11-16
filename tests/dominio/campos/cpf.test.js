@@ -22,9 +22,13 @@ describe("Campo: CPF", () => {
 
     it('deve dar erro com CPF com algum dígito errado', () => {
         const cpfCorreto = "91107755018";
-        const cpfErrado = cpfCorreto.substring(0, 10) + "9";
+        const cpfComPenultimoUltimoDigitoErrado = cpfCorreto.substring(0, 9) + "9" + cpfCorreto[10];
+        const cpfComUltimoDigitoErrado = cpfCorreto.substring(0, 10) + "9";
+        const cpfComOsDoisDigitosErradps = cpfCorreto.substring(0, 9) + "99";
 
-        assert.throws(() => new Cpf(cpfErrado), /^Error: CPF inválido$/);
+        assert.throws(() => new Cpf(cpfComPenultimoUltimoDigitoErrado), /^Error: CPF inválido$/);
+        assert.throws(() => new Cpf(cpfComUltimoDigitoErrado), /^Error: CPF inválido$/);
+        assert.throws(() => new Cpf(cpfComOsDoisDigitosErradps), /^Error: CPF inválido$/);
     })
 
     it('deve criar CPFs com sucesso caso o CPF esteja correto', () => {
@@ -34,9 +38,21 @@ describe("Campo: CPF", () => {
             "89115271064",
             "57581435024"
         ]
-        cpfsCorretos.forEach((cpf) => {
-            assert.doesNotThrow(() => new Cpf(cpf));
+        cpfsCorretos.forEach((cpfValue) => {
+            assert.doesNotThrow(() => new Cpf(cpfValue));
         })
+    })
+
+    it('o CPF deve ter o valor igual ao CPF informado', () => {
+        const cpfValor = "22375922093";
+        const cpf = new Cpf(cpfValor);
+        assert.equal(cpf.valor, cpfValor)
+    })
+
+    it('o deve retornar o valor do CPF quando chamar a função toString()', () => {
+        const cpfValor = "22375922093";
+        const cpf = new Cpf(cpfValor);
+        assert.equal(cpf.toString(), cpfValor)
     })
 
     it('deve comparar CPFs corretamente', () => {

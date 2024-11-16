@@ -15,6 +15,18 @@ describe("Campo: Nome de Pessoa", () => {
         assert.doesNotThrow(() => new NomeDePessoa(nomeCorreto))
     })
 
+    it('o Nome de Pessoa deve ter o valor igual ao nome informado', () => {
+        const nome = "Alfa Beta Ohmega";
+        const nomeDePessoa = new NomeDePessoa(nome);
+        assert.equal(nomeDePessoa.valor, nome);
+    })
+
+    it('a função NomedePessoa.toString() deve retornar o valor igual ao nome informado', () => {
+        const nome = "Alfa Beta Ohmega";
+        const nomeDePessoa = new NomeDePessoa(nome);
+        assert.equal(nomeDePessoa.toString(), nome);
+    })
+
     it('deve comparar Nomes de Pessoas com sucesso', () => {
         const nome1 = new NomeDePessoa('Fulano');
         const nome2 = new NomeDePessoa('Fulano');

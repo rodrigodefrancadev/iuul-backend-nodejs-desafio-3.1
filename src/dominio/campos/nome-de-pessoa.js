@@ -30,10 +30,6 @@ export class NomeDePessoa {
         return this.#valor;
     }
 
-    toJson() {
-        return this.#valor;
-    }
-
     /**
      * 
      * @param {NomeDePessoa} outroNomeDePessoa 

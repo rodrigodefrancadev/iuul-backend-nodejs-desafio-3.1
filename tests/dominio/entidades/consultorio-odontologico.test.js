@@ -23,7 +23,7 @@ describe("Entidade: Consultório Odontológico", () => {
 
     it('deve dar erro ao cadastrar pacientes com idade menor que a mínima', () => {
         const consultorio = testsHelper.gerarConsultorio(IDADE_MINIMA_PACIENTE);
-        const paciente = testsHelper.gerarPaciente({ min: 0, max: IDADE_MINIMA_PACIENTE });
+        const paciente = testsHelper.gerarPaciente({ min: 0, max: IDADE_MINIMA_PACIENTE - 1 });
         assert.throws(() => consultorio.cadastrarNovoPaciente(paciente), /^Error: Paciente com idade menor que a mínima permitida$/);
     })
 
@@ -190,6 +190,28 @@ describe("Entidade: Consultório Odontológico", () => {
 
         assert.throws(() => consultorio.cadastrarAgendamento(agendamento1), /^Error: O agendamento precisa estar dentro do horário de funcionamento do consultório$/);
         assert.throws(() => consultorio.cadastrarAgendamento(agendamento2), /^Error: O agendamento precisa estar dentro do horário de funcionamento do consultório$/);
+    })
+
+    it('deve dar erro ao tentar cancelar um agendamento que não existe', (ctx) => {
+        ctx.mock.timers.enable({
+            apis: ['Date'],
+            now: new Date('2024-11-15T08:00:00')
+        })
+
+        const consultorio = testsHelper.gerarConsultorio(IDADE_MINIMA_PACIENTE);
+
+        const paciente = testsHelper.gerarPaciente();
+
+        consultorio.cadastrarNovoPaciente(paciente);
+
+        const horaInicial = new Horario(9, 0);
+        const horario = new IntervaloDeHorario(horaInicial, new Horario(9, 15))
+
+        const hoje = Data.hoje()
+
+        const agendamento = new Agendamento(paciente.cpf, hoje, horario);
+
+        assert.throws(() => consultorio.cancelarAgendamento(paciente.cpf, hoje, horaInicial), /^Error: Agendamento não encontrado$/);
     })
 
     it('deve dar erro ao tentar cancelar um agendamento do passado', (ctx) => {

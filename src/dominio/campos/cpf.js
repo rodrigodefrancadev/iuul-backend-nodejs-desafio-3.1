@@ -65,10 +65,6 @@ export class Cpf {
         return this.#valor;
     }
 
-    toJson() {
-        return this.#valor;
-    }
-
     /**
      * 
      * @param {Cpf} outroCpf 
