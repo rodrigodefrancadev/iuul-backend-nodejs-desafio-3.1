@@ -8,6 +8,9 @@ import testsHelper from "../../tests-helper.js";
 import { Agendamento } from "../../../src/dominio/entidades/agendamento.js";
 import { DateTime } from "luxon";
 import { Data } from "../../../src/dominio/campos/data.js";
+import { Paciente } from "../../../src/dominio/entidades/paciente.js";
+import { NomeDePessoa } from "../../../src/dominio/campos/nome-de-pessoa.js";
+import { DataDeNascimento } from "../../../src/dominio/campos/data-de-nascimento.js";
 
 const IDADE_MINIMA_PACIENTE = 13;
 
@@ -25,6 +28,15 @@ describe("Entidade: Consultório Odontológico", () => {
         const consultorio = testsHelper.gerarConsultorio(IDADE_MINIMA_PACIENTE);
         const paciente = testsHelper.gerarPaciente({ min: 0, max: IDADE_MINIMA_PACIENTE - 1 });
         assert.throws(() => consultorio.cadastrarNovoPaciente(paciente), /^Error: Paciente com idade menor que a mínima permitida$/);
+    })
+
+    it('deve dar erro ao cadastrar paciente com o mesmo CPF de outro paciente já cadastrado', () => {
+        const consultorio = testsHelper.gerarConsultorio(IDADE_MINIMA_PACIENTE);
+        const paciente = testsHelper.gerarPaciente();
+        consultorio.cadastrarNovoPaciente(paciente);
+
+        const outroPaciente = new Paciente(paciente.cpf, new NomeDePessoa("Outra Pessoa"), new DataDeNascimento(5, 5, 1994));
+        assert.throws(() => consultorio.cadastrarNovoPaciente(paciente), /^Error: Já existe um paciente cadastrado com esse CPF$/);
     })
 
     it('deve excluir paciente com sucesso', () => {

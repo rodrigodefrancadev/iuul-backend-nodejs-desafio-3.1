@@ -1,6 +1,5 @@
 // @ts-check
 
-import { DateTime } from "luxon";
 import { Cpf } from "../campos/cpf.js";
 import { IntervaloDeHorario } from "../campos/intervalo-de-horario.js";
 import { Agendamento } from "./agendamento.js";
@@ -33,6 +32,8 @@ export class ConsultorioOdontologico {
         this.#horarioDeFuncionamento = horarioDeFuncionamento;
     }
 
+
+
     /**
     * 
     * @param {Cpf} cpf
@@ -64,7 +65,24 @@ export class ConsultorioOdontologico {
             throw new Error('Paciente com idade menor que a mínima permitida');
         }
 
+        if (this.#verificaCpfJaCadastrado(paciente.cpf)) {
+            throw new Error('Já existe um paciente cadastrado com esse CPF')
+        }
 
+    }
+
+    /**
+    * @param {Cpf} cpf
+    * @returns {boolean}
+    */
+    #verificaCpfJaCadastrado(cpf) {
+        try {
+            this.getPaciente(cpf);
+            return true;
+        }
+        catch {
+            return false;
+        }
     }
 
     /**
