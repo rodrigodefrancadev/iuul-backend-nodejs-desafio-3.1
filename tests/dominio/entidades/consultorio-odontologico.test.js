@@ -1,17 +1,13 @@
 // @ts-check
 
-import { describe, it, beforeEach } from "node:test"
+import { describe, it } from "node:test"
 import assert from "node:assert/strict"
-import { Paciente } from "../../../src/dominio/entidades/paciente";
-import { Cpf } from "../../../src/dominio/campos/cpf";
-import { NomeDePessoa } from "../../../src/dominio/campos/nome-de-pessoa";
-import { DataDeNascimento } from "../../../src/dominio/campos/data-de-nascimento";
-import { ConsultorioOdontologico } from "../../../src/dominio/entidades/consultorio-odontologico";
-import { IntervaloDeHorario } from "../../../src/dominio/campos/intervalo-de-horario";
-import { Horario } from "../../../src/dominio/campos/horario";
-import testsHelper from "../../tests-helper";
-import { Agendamento } from "../../../src/dominio/entidades/agendamento";
+import { IntervaloDeHorario } from "../../../src/dominio/campos/intervalo-de-horario.js";
+import { Horario } from "../../../src/dominio/campos/horario.js";
+import testsHelper from "../../tests-helper.js";
+import { Agendamento } from "../../../src/dominio/entidades/agendamento.js";
 import { DateTime } from "luxon";
+import { Data } from "../../../src/dominio/campos/data.js";
 
 const IDADE_MINIMA_PACIENTE = 13;
 
@@ -54,7 +50,7 @@ describe("Entidade: Consultório Odontológico", () => {
         consultorio.cadastrarNovoPaciente(paciente);
 
         const horario = new IntervaloDeHorario(new Horario(8, 0), new Horario(8, 15))
-        const amanha = DateTime.fromJSDate(new Date()).plus({ day: 1 }).toJSDate();
+        const amanha = Data.fromJsDate(DateTime.fromJSDate(new Date()).plus({ day: 1 }).toJSDate());
         const agendamento = new Agendamento(outroCpf, amanha, horario)
         assert.throws(() => consultorio.cadastrarAgendamento(agendamento), /^Error: Paciente não encontrado com o CPF informado$/);
     })
@@ -65,7 +61,7 @@ describe("Entidade: Consultório Odontológico", () => {
         consultorio.cadastrarNovoPaciente(paciente);
 
         const horario = new IntervaloDeHorario(new Horario(8, 0), new Horario(8, 15))
-        const ontem = DateTime.fromJSDate(new Date()).minus({ day: 1 }).toJSDate();
+        const ontem = Data.fromJsDate(DateTime.fromJSDate(new Date()).minus({ day: 1 }).toJSDate());
         const agendamento = new Agendamento(paciente.cpf, ontem, horario);
         assert.throws(() => consultorio.cadastrarAgendamento(agendamento), /^Error: O Agendamento precisa estar no futuro$/);
     })
@@ -82,7 +78,7 @@ describe("Entidade: Consultório Odontológico", () => {
         consultorio.cadastrarNovoPaciente(paciente);
 
         const horario = new IntervaloDeHorario(new Horario(11, 45), new Horario(12, 15))
-        const hoje = new Date();
+        const hoje = Data.hoje();
         const agendamento = new Agendamento(paciente.cpf, hoje, horario);
         assert.throws(() => consultorio.cadastrarAgendamento(agendamento), /^Error: O Agendamento precisa estar no futuro$/);
     })
@@ -108,7 +104,7 @@ describe("Entidade: Consultório Odontológico", () => {
         const horario4 = new IntervaloDeHorario(new Horario(10, 0), new Horario(13, 0))
         const horario5 = new IntervaloDeHorario(new Horario(11, 15), new Horario(11, 30))
 
-        const hoje = new Date();
+        const hoje = Data.hoje();
 
         const agendamento1 = new Agendamento(paciente1.cpf, hoje, horario1);
         const agendamento2 = new Agendamento(paciente2.cpf, hoje, horario2);
@@ -139,7 +135,7 @@ describe("Entidade: Consultório Odontológico", () => {
         const horario1 = new IntervaloDeHorario(new Horario(9, 0), new Horario(9, 15))
         const horario2 = new IntervaloDeHorario(new Horario(11, 0), new Horario(11, 30))
 
-        const hoje = new Date();
+        const hoje = Data.hoje();
 
         const agendamento1 = new Agendamento(paciente.cpf, hoje, horario1);
         const agendamento2 = new Agendamento(paciente.cpf, hoje, horario2);
@@ -164,7 +160,7 @@ describe("Entidade: Consultório Odontológico", () => {
         const horario1 = new IntervaloDeHorario(new Horario(9, 0), new Horario(9, 15))
         const horario2 = new IntervaloDeHorario(new Horario(11, 0), new Horario(11, 30))
 
-        const hoje = new Date();
+        const hoje = Data.hoje();
 
         const agendamento1 = new Agendamento(paciente.cpf, hoje, horario1);
         assert.doesNotThrow(() => consultorio.cadastrarAgendamento(agendamento1));
@@ -184,10 +180,10 @@ describe("Entidade: Consultório Odontológico", () => {
 
         consultorio.cadastrarNovoPaciente(paciente);
 
-        const horario1 = new IntervaloDeHorario(new Horario(4, 0), new Horario(4, 15))
-        const horario2 = new IntervaloDeHorario(new Horario(20, 0), new Horario(20, 30))
+        const horario1 = new IntervaloDeHorario(new Horario(4, 0), new Horario(4, 15));
+        const horario2 = new IntervaloDeHorario(new Horario(20, 0), new Horario(20, 30));
 
-        const amanha = DateTime.fromJSDate(new Date()).plus({ day: 1 }).toJSDate();
+        const amanha = Data.fromJsDate(DateTime.fromJSDate(new Date()).plus({ day: 1 }).toJSDate());
 
         const agendamento1 = new Agendamento(paciente.cpf, amanha, horario1);
         const agendamento2 = new Agendamento(paciente.cpf, amanha, horario2);
@@ -211,7 +207,7 @@ describe("Entidade: Consultório Odontológico", () => {
         const horaInicial = new Horario(9, 0);
         const horario = new IntervaloDeHorario(horaInicial, new Horario(9, 15))
 
-        const hoje = new Date();
+        const hoje = Data.hoje()
 
         const agendamento = new Agendamento(paciente.cpf, hoje, horario);
         assert.doesNotThrow(() => consultorio.cadastrarAgendamento(agendamento));
@@ -219,7 +215,7 @@ describe("Entidade: Consultório Odontológico", () => {
         const milisegundosEmDuasHoras = 2 * 60 * 60 * 1000;
         ctx.mock.timers.tick(milisegundosEmDuasHoras);
 
-        assert.throws(() => consultorio.cancelarAgendamento(paciente.cpf, horaInicial), /^Error: Não é possível cancelar um agendamento passado$/);
+        assert.throws(() => consultorio.cancelarAgendamento(paciente.cpf, hoje, horaInicial), /^Error: Não é possível cancelar um agendamento passado$/);
     })
 
     it('deve cancelar com sucesso um agendamento no futuro', (ctx) => {
@@ -237,12 +233,21 @@ describe("Entidade: Consultório Odontológico", () => {
         const horaInicial = new Horario(9, 0);
         const horario = new IntervaloDeHorario(horaInicial, new Horario(9, 15))
 
-        const hoje = new Date();
+        const hoje = Data.hoje();
 
         const agendamento = new Agendamento(paciente.cpf, hoje, horario);
         assert.doesNotThrow(() => consultorio.cadastrarAgendamento(agendamento));
-
-        assert.doesNotThrow(() => consultorio.cancelarAgendamento(paciente.cpf, horaInicial));
+        assert.equal(consultorio.listarAgendamentos().filter(ag =>
+            ag.cpfDoPaciente.equals(paciente.cpf)
+            && ag.dia.equals(agendamento.dia)
+            && ag.intervaloDeHorario.inicio.equals(agendamento.intervaloDeHorario.inicio)
+        ).length, 1);
+        assert.doesNotThrow(() => consultorio.cancelarAgendamento(paciente.cpf, hoje, horaInicial));
+        assert.equal(consultorio.listarAgendamentos().filter(ag =>
+            ag.cpfDoPaciente.equals(paciente.cpf)
+            && ag.dia.equals(agendamento.dia)
+            && ag.intervaloDeHorario.inicio.equals(agendamento.intervaloDeHorario.inicio)
+        ).length, 0);
 
 
     })
@@ -261,7 +266,7 @@ describe("Entidade: Consultório Odontológico", () => {
 
         const horario = new IntervaloDeHorario(new Horario(9, 0), new Horario(9, 15))
 
-        const hoje = new Date();
+        const hoje = Data.hoje();
 
         const agendamento = new Agendamento(paciente.cpf, hoje, horario);
         assert.doesNotThrow(() => consultorio.cadastrarAgendamento(agendamento));
@@ -286,7 +291,7 @@ describe("Entidade: Consultório Odontológico", () => {
         const horario2 = new IntervaloDeHorario(new Horario(10, 30), new Horario(10, 45))
         const horario3 = new IntervaloDeHorario(new Horario(13, 45), new Horario(14, 0))
 
-        const hoje = new Date();
+        const hoje = Data.hoje();
 
         const agendamento1 = new Agendamento(paciente.cpf, hoje, horario1);
         const agendamento2 = new Agendamento(paciente.cpf, hoje, horario2);
@@ -302,13 +307,12 @@ describe("Entidade: Consultório Odontológico", () => {
         assert.doesNotThrow(() => consultorio.cadastrarAgendamento(agendamento3));
         ctx.mock.timers.tick(milisegundosEmDuasHoras);
 
-        const agendamentosAntesDeDeletarPaciente = consultorio.listarAgendamentoDePaciente(paciente.cpf);
-        assert(agendamentosAntesDeDeletarPaciente.length === 3);
+        assert.equal(consultorio.listarAgendamentos().filter(ag => ag.cpfDoPaciente.equals(paciente.cpf)).length, 3);
 
         assert.doesNotThrow(() => consultorio.excluirPaciente(paciente.cpf));
 
-        const agendamentosDepoisDeDeletarPaciente = consultorio.listarAgendamentoDePaciente(paciente.cpf);
-        assert(agendamentosDepoisDeDeletarPaciente.length === 0);
+        assert.equal(consultorio.listarAgendamentos().filter(ag => ag.cpfDoPaciente.equals(paciente.cpf)).length, 0);
+
 
     })
 });

@@ -12,20 +12,20 @@ export class Paciente {
     #dataDeNascimento;
 
     get cpf() {
-        return this.#cpf.valor;
+        return this.#cpf;
     }
 
     get nome() {
-        return this.#nome.valor;
+        return this.#nome;
     }
 
     get dataDeNascimento() {
-        return this.#dataDeNascimento.valor;
+        return this.#dataDeNascimento;
     }
 
     get idade() {
         const intervalo = Interval.fromDateTimes(
-            DateTime.fromJSDate(this.#dataDeNascimento.valor).startOf('day'),
+            DateTime.fromJSDate(this.#dataDeNascimento.toJsDate()).startOf('day'),
             DateTime.now().startOf('day')
         );
         const idade = intervalo.length('years');

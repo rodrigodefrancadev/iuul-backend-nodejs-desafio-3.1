@@ -38,6 +38,7 @@ describe("Campo: Data de Nascimento", () => {
         assert(!data1.equals(data3));
         assert(!data2.equals(data3));
         assert(data3.equals(data3));
+        assert(data1 < data3);
     })
 
 })

@@ -73,7 +73,7 @@ export class Cpf {
      * 
      * @param {Cpf} outroCpf 
      */
-    equal(outroCpf) {
+    equals(outroCpf) {
         return this.#valor === outroCpf.#valor;
     }
 }

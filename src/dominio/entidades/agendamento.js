@@ -1,6 +1,7 @@
 //@ts-check
 
 import { Cpf } from "../campos/cpf.js";
+import { Data } from "../campos/data.js";
 import { IntervaloDeHorario } from "../campos/intervalo-de-horario.js";
 
 export class Agendamento {
@@ -24,7 +25,7 @@ export class Agendamento {
     /**
      * 
      * @param {Cpf} cpfDoPaciente
-     * @param {Date} dia 
+     * @param {Data} dia 
      * @param {IntervaloDeHorario} intervaloDeHorario
      */
     constructor(cpfDoPaciente, dia, intervaloDeHorario) {

@@ -44,13 +44,13 @@ describe("Campo: CPF", () => {
         const cpf2 = new Cpf("22375922093");
         const cpf3 = new Cpf("92825016047");
 
-        assert(cpf1.equal(cpf2) === true);
-        assert(cpf2.equal(cpf1) === true);
+        assert(cpf1.equals(cpf2) === true);
+        assert(cpf2.equals(cpf1) === true);
 
-        assert(cpf1.equal(cpf3) === false);
-        assert(cpf2.equal(cpf3) === false);
+        assert(cpf1.equals(cpf3) === false);
+        assert(cpf2.equals(cpf3) === false);
 
-        assert(cpf3.equal(cpf3) === true);
+        assert(cpf3.equals(cpf3) === true);
     })
 
 })

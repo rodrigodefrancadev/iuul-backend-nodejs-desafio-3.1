@@ -57,11 +57,37 @@ export class Data {
         return new Date(this.#ano, this.#mes - 1, this.#dia);
     }
 
+    valueOf() {
+        return this.toJsDate().getTime();
+    }
+
     /**
      * 
      * @param {Data} outraData 
      */
     equals(outraData) {
         return this.toString() === outraData.toString();
+    }
+
+    static hoje() {
+        const date = new Date();
+        const dia = date.getDate();
+        const mes = date.getMonth() + 1;
+        const ano = date.getFullYear();
+
+        return new Data(dia, mes, ano);
+    }
+
+    /**
+     * 
+     * @param {Date} date
+     * @returns {Data} 
+     */
+    static fromJsDate(date) {
+        const dia = date.getDate();
+        const mes = date.getMonth() + 1;
+        const ano = date.getFullYear();
+
+        return new Data(dia, mes, ano);
     }
 }

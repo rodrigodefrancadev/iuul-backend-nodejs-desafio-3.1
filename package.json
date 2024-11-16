@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "node --test",
-    "test:watch": "node --test --watch"
+    "test:watch": "node --test --watch",
+    "test:coverage": "node --test --experimental-test-coverage"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "description": "",
   "dependencies": {
     "luxon": "^3.5.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.2.0"
   }
 }

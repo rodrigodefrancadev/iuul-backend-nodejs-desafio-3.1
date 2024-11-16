@@ -6,11 +6,12 @@ import { Cpf } from "../../../src/dominio/campos/cpf.js";
 import { Horario } from "../../../src/dominio/campos/horario.js";
 import { IntervaloDeHorario } from "../../../src/dominio/campos/intervalo-de-horario.js";
 import { Agendamento } from "../../../src/dominio/entidades/agendamento.js";
+import { Data } from "../../../src/dominio/campos/data.js";
 
 describe("Entidade: Agendamento", () => {
     const cpf = new Cpf('22375922093');
 
-    it('deve dar erro ao criar um agendamento em que os horário não são definidos emt termos de 15 em 15 minutos', () => {
+    it('deve dar erro ao criar um agendamento em que os horário não são definidos em termos de 15 em 15 minutos', () => {
         const _0800 = Horario.fromHHMMstr('0800');
         const _0812 = Horario.fromHHMMstr('0812');
         const _0816 = Horario.fromHHMMstr('0816');
@@ -22,12 +23,12 @@ describe("Entidade: Agendamento", () => {
         const intervalo3 = new IntervaloDeHorario(_0812, _0816);
         const intervalo4 = new IntervaloDeHorario(_0825, _0900);
 
-        const dia = new Date();
+        const hoje = Data.hoje();
 
-        assert.throws(() => new Agendamento(cpf, dia, intervalo1), /^Error: O Intervalo de Horario do Agendamento deve ser definido em termos de 15 em 15 minutos$/);
-        assert.throws(() => new Agendamento(cpf, dia, intervalo2), /^Error: O Intervalo de Horario do Agendamento deve ser definido em termos de 15 em 15 minutos$/);
-        assert.throws(() => new Agendamento(cpf, dia, intervalo3), /^Error: O Intervalo de Horario do Agendamento deve ser definido em termos de 15 em 15 minutos$/);
-        assert.throws(() => new Agendamento(cpf, dia, intervalo4), /^Error: O Intervalo de Horario do Agendamento deve ser definido em termos de 15 em 15 minutos$/);
+        assert.throws(() => new Agendamento(cpf, hoje, intervalo1), /^Error: O Intervalo de Horario do Agendamento deve ser definido em termos de 15 em 15 minutos$/);
+        assert.throws(() => new Agendamento(cpf, hoje, intervalo2), /^Error: O Intervalo de Horario do Agendamento deve ser definido em termos de 15 em 15 minutos$/);
+        assert.throws(() => new Agendamento(cpf, hoje, intervalo3), /^Error: O Intervalo de Horario do Agendamento deve ser definido em termos de 15 em 15 minutos$/);
+        assert.throws(() => new Agendamento(cpf, hoje, intervalo4), /^Error: O Intervalo de Horario do Agendamento deve ser definido em termos de 15 em 15 minutos$/);
     })
 
     it('deve criar um agendamento com sucesso', () => {
@@ -42,11 +43,11 @@ describe("Entidade: Agendamento", () => {
         const intervalo3 = new IntervaloDeHorario(_0815, _0845);
         const intervalo4 = new IntervaloDeHorario(_0845, _0900);
 
-        const dia = new Date();
+        const hoje = Data.hoje();
 
-        assert.doesNotThrow(() => new Agendamento(cpf, dia, intervalo1));
-        assert.doesNotThrow(() => new Agendamento(cpf, dia, intervalo2));
-        assert.doesNotThrow(() => new Agendamento(cpf, dia, intervalo3));
-        assert.doesNotThrow(() => new Agendamento(cpf, dia, intervalo4));
+        assert.doesNotThrow(() => new Agendamento(cpf, hoje, intervalo1));
+        assert.doesNotThrow(() => new Agendamento(cpf, hoje, intervalo2));
+        assert.doesNotThrow(() => new Agendamento(cpf, hoje, intervalo3));
+        assert.doesNotThrow(() => new Agendamento(cpf, hoje, intervalo4));
     })
 });
