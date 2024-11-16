@@ -20,6 +20,10 @@ export class ConsultorioOdontologico {
     #idadeMinimaPaciente;
     #horarioDeFuncionamento;
 
+    get pacientes() {
+        return [...this.#pacientes];
+    }
+
     /**
      * 
      * @param {number} idadeMinimaPaciente 
@@ -147,14 +151,29 @@ export class ConsultorioOdontologico {
         }
 
         //Verifica se o paciente já possui um agendamento futuro
-        const temAgendamentoFuturo = this.#agendamentos
-            .filter(ag => ag.cpfDoPaciente.equals(agendamento.cpfDoPaciente) && ag.dia >= Data.hoje() && ag.intervaloDeHorario.inicio >= Horario.agora())
-            .length > 0;
+        const temAgendamentoFuturo = this.buscarAgendamentoFuturoDePaciente(agendamento.cpfDoPaciente);
         if (temAgendamentoFuturo) {
             throw new Error('O paciente já possui um agendamento futuro cadastrado');
         }
 
         this.#agendamentos.push(agendamento);
+    }
+
+    /**
+     * 
+     * @param {Cpf} cpf 
+     */
+    buscarAgendamentoFuturoDePaciente(cpf) {
+        const agendamento = this.#agendamentos.find(
+            ag => ag.cpfDoPaciente.equals(cpf) && (
+                ag.dia > Data.hoje()
+                || (
+                    ag.dia.equals(Data.hoje())
+                    && ag.intervaloDeHorario.inicio >= Horario.agora()
+                )
+            )
+        );
+        return agendamento ?? null;
     }
 
     /**
@@ -183,6 +202,11 @@ export class ConsultorioOdontologico {
      * @param {{inicio: Data, fim: Data}=} periodo
      */
     listarAgendamentos(periodo) {
-        return this.#agendamentos;
+        if (periodo) {
+            return this.#agendamentos.filter(ag => ag.dia >= periodo.inicio && ag.dia <= periodo.fim);
+        }
+        else {
+            return this.#agendamentos;
+        }
     }
 }

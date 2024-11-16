@@ -4,6 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node src/main.js",
     "test": "node --test",
     "test:watch": "node --test --watch",
     "test:coverage": "node --test --experimental-test-coverage"
@@ -20,9 +21,12 @@
   "homepage": "https://github.com/rodrigodefrancadev/iuul-backend-nodejs-desafio-1.2#readme",
   "description": "",
   "dependencies": {
-    "luxon": "^3.5.0"
+    "console-table-printer": "^2.12.1",
+    "luxon": "^3.5.0",
+    "prompt-sync": "^4.2.0"
   },
   "devDependencies": {
-    "@faker-js/faker": "^9.2.0"
+    "@faker-js/faker": "^9.2.0",
+    "@types/node": "^22.9.0"
   }
 }

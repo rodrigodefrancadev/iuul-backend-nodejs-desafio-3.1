@@ -14,6 +14,15 @@ export class IntervaloDeHorario {
         return this.#fim;
     }
 
+    get duracao() {
+        const fim = this.fim.valueOf();
+        const inicio = this.inicio.valueOf();
+        const diff = fim - inicio;
+        const horas = Math.floor(diff / 60);
+        const minutos = diff % 60;
+        return new Horario(horas, minutos);
+    }
+
     /**
      * 
      * @param {Horario} inicio 

@@ -90,4 +90,20 @@ export class Data {
 
         return new Data(dia, mes, ano);
     }
+
+    /**
+     * 
+     * @param {string} brDateString 
+     * @returns Data
+     */
+    static fromBrDateString(brDateString) {
+        const dataRegex = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
+        if (!dataRegex.test(brDateString)) {
+            throw new Error('Erro: formato inválido. A data deve estar no formato DD/MM/AAAA.');
+        }
+
+        const [dia, mes, ano] = brDateString.split('/').map(x => Number(x));
+        const data = new Data(dia, mes, ano);
+        return data;
+    }
 }

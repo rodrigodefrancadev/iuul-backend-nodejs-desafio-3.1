@@ -23,4 +23,14 @@ export class DataDeNascimento extends Data {
             throw new Error('A data de nascimento não pode ser no futuro');
         }
     }
+
+    /**
+     * 
+     * @param {string} brDateString 
+     * @returns Data
+     */
+    static fromBrDateString(brDateString) {
+        const data = Data.fromBrDateString(brDateString);
+        return new DataDeNascimento(data.dia, data.mes, data.ano);
+    }
 }
