@@ -20,7 +20,6 @@ class Db {
     this.#sequelize = new Sequelize("database", "postgress", "root", {
       host: "localhost",
       dialect: "postgres",
-      logging: true,
       port: 5555,
     });
 
@@ -35,7 +34,7 @@ class Db {
 
     this.#initModels();
     this.#setupRelationships();
-
+    await this.#sequelize.sync();
     return true;
   }
 
@@ -52,39 +51,55 @@ class Db {
         },
         nome: {
           type: DataTypes.STRING,
+          allowNull: false,
         },
         dataDeNascimento: {
-          type: DataTypes.DATE,
+          type: DataTypes.DATEONLY,
+          allowNull: false,
         },
       },
-      { sequelize: this.sequelize }
+      {
+        sequelize: this.sequelize,
+        freezeTableName: true,
+        indexes: [{ unique: true, fields: ["cpf"] }],
+      }
     );
 
     AgendamentoDbModel.init(
       {
-        cpfDoPaciente: {
-          type: DataTypes.STRING,
-        },
         diaHorarioInicio: {
           type: DataTypes.DATE,
           primaryKey: true,
         },
         diaHorarioFim: {
           type: DataTypes.DATE,
+          allowNull: false,
+        },
+        cpfDoPaciente: {
+          type: DataTypes.STRING,
+          allowNull: false,
+          references: {
+            model: PacienteDbModel,
+            key: "cpf",
+          },
+          onDelete: "CASCADE",
+          onUpdate: "CASCADE",
         },
       },
-      { sequelize: this.sequelize }
+      {
+        sequelize: this.sequelize,
+        freezeTableName: true,
+        indexes: [{ unique: true, fields: ["diaHorarioInicio"] }],
+      }
     );
   }
 
   #setupRelationships() {
     PacienteDbModel.hasMany(AgendamentoDbModel, {
-      foreignKey: { allowNull: false },
-      as: "agendamentos",
+      foreignKey: "cpfDoPaciente",
     });
     AgendamentoDbModel.belongsTo(PacienteDbModel, {
       foreignKey: "cpfDoPaciente",
-      as: "paciente",
     });
   }
 }
