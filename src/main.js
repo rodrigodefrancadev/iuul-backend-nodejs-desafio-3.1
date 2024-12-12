@@ -8,31 +8,37 @@ import { AgendamentoRepository } from "./repository/agendamento.repository.js";
 import { PacienteRepository } from "./repository/paciente.repository.js";
 import { IO } from "./helpers/io.js";
 import { InterfaceDeUsuario } from "./interface-de-usuario.js";
+import db from "./db/db.js";
 
-const IDADE_MINIMA_PACIENTE = 13;
-const consultorioHorarioAbertura = new Horario(8, 0);
-const consultorioHorarioFechametno = new Horario(19, 0);
-const horarioDeFuncionamento = new IntervaloDeHorario(
-  consultorioHorarioAbertura,
-  consultorioHorarioFechametno
-);
+async function main() {
+  await db.init();
+  const IDADE_MINIMA_PACIENTE = 13;
+  const consultorioHorarioAbertura = new Horario(8, 0);
+  const consultorioHorarioFechametno = new Horario(19, 0);
+  const horarioDeFuncionamento = new IntervaloDeHorario(
+    consultorioHorarioAbertura,
+    consultorioHorarioFechametno
+  );
 
-const configuracoes = new Configuracoes(
-  IDADE_MINIMA_PACIENTE,
-  horarioDeFuncionamento
-);
+  const configuracoes = new Configuracoes(
+    IDADE_MINIMA_PACIENTE,
+    horarioDeFuncionamento
+  );
 
-const pacienteRepository = new PacienteRepository();
-const agendamentoRepository = new AgendamentoRepository();
+  const pacienteRepository = new PacienteRepository();
+  const agendamentoRepository = new AgendamentoRepository();
 
-const casosDeUso = new CasosDeUso(
-  pacienteRepository,
-  agendamentoRepository,
-  configuracoes
-);
+  const casosDeUso = new CasosDeUso(
+    pacienteRepository,
+    agendamentoRepository,
+    configuracoes
+  );
 
-const io = new IO();
-const interfaceDeUsuario = new InterfaceDeUsuario(io, casosDeUso);
-interfaceDeUsuario.loopPrincipal();
+  const io = new IO();
+  const interfaceDeUsuario = new InterfaceDeUsuario(io, casosDeUso);
+  interfaceDeUsuario.loopPrincipal();
+}
+
+main();
 
 export {};
