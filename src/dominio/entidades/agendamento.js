@@ -69,4 +69,21 @@ export class Agendamento {
 
     return false;
   }
+
+  estaNoFuturo() {
+    if (this.dia > Data.hoje()) {
+      // é de um dia depois de hoje
+      return true;
+    }
+
+    if (
+      this.dia.equals(Data.hoje()) &&
+      this.intervaloDeHorario.inicio > Horario.agora()
+    ) {
+      // é de hoje, mas de um horário mais tarde
+      return true;
+    }
+
+    return false;
+  }
 }

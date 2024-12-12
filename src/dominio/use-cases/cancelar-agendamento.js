@@ -1,10 +1,10 @@
 // @ts-check
 
-import { Cpf } from "../campos/cpf";
-import { Data } from "../campos/data";
-import { Horario } from "../campos/horario";
-import { Agendamento } from "../entidades/agendamento";
-import { AgendamentoRepository } from "../repository/agendamento.repository";
+import { Cpf } from "../campos/cpf.js";
+import { Data } from "../campos/data.js";
+import { Horario } from "../campos/horario.js";
+import { Agendamento } from "../entidades/agendamento.js";
+import { AgendamentoRepository } from "../repository/agendamento.repository.js";
 
 export class CancelarAgendamentoUseCase {
   #agendamentoRepository;
