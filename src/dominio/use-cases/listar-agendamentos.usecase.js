@@ -17,7 +17,15 @@ export class ListarAgendamentosUseCase {
    * @param {{inicio: Data, fim: Data}=} periodo
    */
   async executar(periodo) {
-    const agendamentos = await this.#agendamentoRepository.filtrar({ periodo });
+    const filtro = periodo
+      ? {
+          inicio: { dia: periodo.inicio },
+          fim: { dia: periodo.fim },
+        }
+      : undefined;
+
+    const agendamentos = await this.#agendamentoRepository.filtrar(filtro);
+
     return agendamentos;
   }
 }
