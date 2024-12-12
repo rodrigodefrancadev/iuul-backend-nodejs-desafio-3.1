@@ -1,16 +1,16 @@
 // @ts-check
 
-import { CadastrarPacienteUseCase } from "./dominio/use-cases/cadastrar-paciente.use-case.js";
-import { PacienteRepository } from "./dominio/repository/paciente.repository.js";
-import { Configuracoes } from "./dominio/configuracoes.js";
-import { ListarPacientesEAgendamentoFuturoUseCase } from "./dominio/use-cases/listar-pacientes-e-agendamento-futuro.use-case.js";
-import { BuscarPacientePorCpfUseCase } from "./dominio/use-cases/buscar-paciente-por-cpf.js";
-import { CancelarAgendamentoUseCase } from "./dominio/use-cases/cancelar-agendamento.js";
-import { AgendamentoRepository } from "./dominio/repository/agendamento.repository.js";
-import { ListarAgendamentosFuturosDePacienteUseCase } from "./dominio/use-cases/listar-agendamentos-futuros-de-paciente.usecase.js";
-import { ExcluirPacienteUseCase } from "./dominio/use-cases/excluir-paciente.use-case.js";
-import { CadastrarAgendamentoUseCase } from "./dominio/use-cases/cadastrar-agendamento.use-case.js";
-import { ListarAgendamentosComPacienteUseCase } from "./dominio/use-cases/listar-agendamentos-com-paciente.usecase.js";
+import { CadastrarPacienteUseCase } from "./use-cases/cadastrar-paciente.use-case.js";
+import { PacienteRepository } from "./repository/paciente.repository.js";
+import { Configuracoes } from "./configuracoes.js";
+import { ListarPacientesEAgendamentoFuturoUseCase } from "./use-cases/listar-pacientes-e-agendamento-futuro.use-case.js";
+import { BuscarPacientePorCpfUseCase } from "./use-cases/buscar-paciente-por-cpf.js";
+import { CancelarAgendamentoUseCase } from "./use-cases/cancelar-agendamento.js";
+import { AgendamentoRepository } from "./repository/agendamento.repository.js";
+import { ListarAgendamentosFuturosDePacienteUseCase } from "./use-cases/listar-agendamentos-futuros-de-paciente.usecase.js";
+import { ExcluirPacienteUseCase } from "./use-cases/excluir-paciente.use-case.js";
+import { CadastrarAgendamentoUseCase } from "./use-cases/cadastrar-agendamento.use-case.js";
+import { ListarAgendamentosComPacienteUseCase } from "./use-cases/listar-agendamentos-com-paciente.usecase.js";
 
 export class CasosDeUso {
   #cadastrarPaciente;

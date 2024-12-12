@@ -1,15 +1,15 @@
 // @ts-check
 
 import { Table } from "console-table-printer";
-import { Cpf } from "./dominio/campos/cpf.js";
-import { DataDeNascimento } from "./dominio/campos/data-de-nascimento.js";
-import { NomeDePessoa } from "./dominio/campos/nome-de-pessoa.js";
-import { Paciente } from "./dominio/entidades/paciente.js";
+import { Cpf } from "./campos/cpf.js";
+import { DataDeNascimento } from "./campos/data-de-nascimento.js";
+import { NomeDePessoa } from "./campos/nome-de-pessoa.js";
+import { Paciente } from "./entidades/paciente.js";
 import { IO } from "./helpers/io.js";
-import { Agendamento } from "./dominio/entidades/agendamento.js";
-import { IntervaloDeHorario } from "./dominio/campos/intervalo-de-horario.js";
-import { Data } from "./dominio/campos/data.js";
-import { Horario } from "./dominio/campos/horario.js";
+import { Agendamento } from "./entidades/agendamento.js";
+import { IntervaloDeHorario } from "./campos/intervalo-de-horario.js";
+import { Data } from "./campos/data.js";
+import { Horario } from "./campos/horario.js";
 import { CasosDeUso } from "./casos-de-uso.js";
 
 export class InterfaceDeUsuario {

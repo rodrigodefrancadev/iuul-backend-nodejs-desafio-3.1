@@ -1,4 +1,5 @@
 // @ts-check
+
 import { Horario } from "./horario.js";
 
 export class IntervaloDeHorario {
