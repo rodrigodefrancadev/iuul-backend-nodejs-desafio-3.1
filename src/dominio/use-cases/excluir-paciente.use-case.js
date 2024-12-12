@@ -4,7 +4,7 @@ import { Cpf } from "../campos/cpf.js";
 import { AgendamentoRepository } from "../repository/agendamento.repository.js";
 import { PacienteRepository } from "../repository/paciente.repository.js";
 
-export class ExcluiirPacienteUseCase {
+export class ExcluirPacienteUseCase {
   #pacienteRepository;
   #agendamentoRepository;
 
