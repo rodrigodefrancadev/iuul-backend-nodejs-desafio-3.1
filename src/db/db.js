@@ -13,15 +13,11 @@ class Db {
 
   /**
    * Inicializa o BD
-   *
+   * @param {string} dabaseUri
    * @returns True, se o BD está acessivel, ou False, caso contrário
    */
-  async init() {
-    this.#sequelize = new Sequelize("database", "postgress", "root", {
-      host: "localhost",
-      dialect: "postgres",
-      port: 5555,
-    });
+  async init(dabaseUri) {
+    this.#sequelize = new Sequelize(dabaseUri, { logging: false });
 
     try {
       await this.#sequelize.authenticate();

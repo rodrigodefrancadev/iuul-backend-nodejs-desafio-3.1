@@ -9,9 +9,15 @@ import { PacienteRepository } from "./repository/paciente.repository.js";
 import { IO } from "./helpers/io.js";
 import { InterfaceDeUsuario } from "./interface-de-usuario.js";
 import db from "./db/db.js";
+import ENV from "./env.js";
 
 async function main() {
-  await db.init();
+  const dbSuccess = await db.init(ENV.DATABASE_URI);
+  if (!dbSuccess) {
+    console.log("Encerrando aplicação");
+    process.exit();
+  }
+
   const IDADE_MINIMA_PACIENTE = 13;
   const consultorioHorarioAbertura = new Horario(8, 0);
   const consultorioHorarioFechametno = new Horario(19, 0);
